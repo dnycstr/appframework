@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs
+/appframework/.vs/appframework/v16
+/appframework/src/app.Core/obj
+/appframework/src/app.Data/obj
+/appframework/src/app.Infra/obj
+/appframework/src/app.Service/obj
+/appframework/src/app.Web/app.Web/obj
