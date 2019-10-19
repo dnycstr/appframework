@@ -9,3 +9,9 @@
 /appframework/src/app.Infra/obj
 /appframework/src/app.Service/obj
 /appframework/src/app.Web/app.Web/obj
+/appframework/src/app.Infra/bin/Debug/netcoreapp3.0
+/appframework/src/app.Service/bin/Debug/netcoreapp3.0
+/appframework/src/app.Web/app.Web/bin/Debug/netcoreapp3.0
+/appframework/src/app.Data/bin/Debug/netcoreapp3.0
+/appframework/src/app.Core/bin/Debug/netcoreapp3.0
+/appframework/.vs/appframework/config
