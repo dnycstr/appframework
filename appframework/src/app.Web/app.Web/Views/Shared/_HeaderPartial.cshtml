@@ -1,0 +1,52 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="top_nav hidden-print">
+        <div class="nav_menu">
+
+            <nav>
+                <div class="nav toggle">
+                    <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                </div>
+                <div class="navbar nav_header_text" style="border: 0;">
+                    <a href="@Url.Action("Index","Home")" class="site_header_text"><span>DSC</span></a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="">
+                        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">                           
+                            @User.Identity.Name
+                            <span class=" fa fa-angle-down"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-usermenu pull-right">
+                            <li><a href="@Url.Action("ViewUserDetails", "Account")"> Account </a></li>
+                            <li><a href="@Url.Action("ChangePassword", "Account")">Change Password</a></li>
+                            <li><a href="#logout" onclick="logoutFunction()"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        function logoutFunction() {
+
+            var r = confirm("Are you sure you want to logout?");
+            if (r == true) {
+                javascript: document.getElementById('logoutForm').submit();
+            } else {
+
+            }
+        }
+    </script>
+
+    <form id="logoutForm" class = "navbar-right" asp-controller="Account" asp-action="Logoff" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        @Html.AntiForgeryToken()
+    </form>
+   
+}

@@ -1,34 +1,55 @@
 ﻿@model LoginViewModel
 
-<div class="login-page">
-    <div class="page-header">
-        <h1>Login</h1>
-    </div>
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
 
-    <partial name="_ValidationSummary" />
+<div class="login">
+    <div>
+        <div class="login_wrapper">
+            <div class="animate form login_form">
 
-    <div class="row">
+                <div class="panel panel-green">
+                    <div class="panel-heading" style="min-height: 72px">
 
-        @if (Model.EnableLocalLogin)
-        {
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Local Login</h3>
+                        <i class="fa fa-lock fa-4x pull-left"></i>
+
+                        <h3 class="pull-left">DSC App v1.0</h3>
+                        <h4 class="text-right text-capitalize">Application Framework </h4>
                     </div>
                     <div class="panel-body">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <partial name="_ValidationSummary" />
+
+                            </div>
+                        </div>
+
 
                         <form asp-route="Login">
                             <input type="hidden" asp-for="ReturnUrl" />
 
+                            @Html.AntiForgeryToken()
+                            <br />
                             <fieldset>
                                 <div class="form-group">
-                                    <label asp-for="Username"></label>
-                                    <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
+                                    <div class="row">
+                                        <label asp-for="Username" class="col-md-2 control-label"></label>
+                                        <div class="col-md-10">
+                                            <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="Password"></label>
-                                    <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
+                                    <div class="row">
+                                        <label asp-for="Password" class="col-md-2 control-label"></label>
+                                        <div class="col-md-10">
+                                            <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
+                                        </div>
+                                    </div>
                                 </div>
                                 @if (Model.AllowRememberLogin)
                                 {
@@ -39,21 +60,36 @@
                                         </label>
                                     </div>
                                 }
-
-                                <div>
-                                    <p>The default users are alice/bob, password: Pass123$</p>
-                                </div>
-
                                 <div class="form-group">
-                                    <button class="btn btn-primary" name="button" value="login">Login</button>
-                                    <button class="btn btn-default" name="button" value="cancel">Cancel</button>
+                                    <div class="row">
+                                        <div class="col-md-offset-10 col-md-10">
+                                            <input type="submit" value="Log in" class="btn btn-default" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </fieldset>
+                            </fieldset>                           
                         </form>
+
+
+                       
+                    </div>
+                    <div class="panel-footer">
+                        &copy; @DateTime.Now.Year - DSC
                     </div>
                 </div>
-            </div>
-        }
 
+
+            </div>
+        </div>
     </div>
 </div>
+
+@section Scripts {
+   
+    <script type="text/javascript">
+        $(".validation-summary-errors").removeClass("validation-summary-errors");
+    </script>
+
+}
+
+
