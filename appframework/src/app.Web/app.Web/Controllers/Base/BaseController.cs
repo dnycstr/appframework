@@ -15,6 +15,14 @@ namespace app.Web.Controllers.Base
         {
 
         }
-     
+
+
+        public void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.ToString());
+            }
+        }
     }
 }

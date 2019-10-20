@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace app.Data.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class IntialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,10 +40,6 @@ namespace app.Data.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: true),
-                    MiddleName = table.Column<string>(maxLength: 50, nullable: true),
-                    LastName = table.Column<string>(maxLength: 50, nullable: true),
-                    PictureUrl = table.Column<string>(maxLength: 1000, nullable: true),
                     IsActive = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
