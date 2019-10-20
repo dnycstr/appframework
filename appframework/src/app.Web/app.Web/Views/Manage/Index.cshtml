@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "Account";
+}
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header"> Account </h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="panel panel-primary">
+
+            <div class="panel-heading clearfix">
+                <h4 style="text-indent: 20px;">User Accounts</h4>
+            </div>
+
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="table-control-panel" class="pull-left">
+
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-sm btn-outline btn-primary" id="btn-datatable-reload"
+                                    data-toggle="tooltip" data-placement="bottom" title="refresh table">
+                                <i class="fa fa-2x fa-refresh"></i>
+                                <span class="btn-icon-text">refresh</span>
+                            </button>
+                            <button class="btn btn-sm btn-outline btn-primary" id="btn-new-entry-modal"
+                                    data-toggle="tooltip" data-placement="bottom" title="new entry">
+                                <i class="fa fa-2x fa-plus-circle"></i>
+                                <span class="btn-icon-text">&nbsp; new &nbsp;</span>
+                            </button>
+                            <button class="btn btn-sm btn-outline btn-warning" id="btn-update-entry-modal"
+                                    data-toggle="tooltip" data-placement="bottom" title="update entry">
+                                <i class="fa fa-2x fa-edit"></i>
+                                <span class="btn-icon-text">update</span>
+                            </button>
+                            <button class="btn btn-sm btn-outline btn-warning" id="btn-reset-pass-modal"
+                                    data-toggle="tooltip" data-placement="bottom" title="reset password">
+                                <i class="fa fa-2x fa-undo"></i>
+                                <span class="btn-icon-text">reset</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div id="list-view-partial-container">
+                    <partial name="_PageLoaderPartial" />
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript">
+
+        // Call Searchable Dropdown List
+        $(document).ajaxStop(function () {
+            $(".chosen-select").chosen();
+            $('div .chosen-container').removeAttr('style');
+        })
+        // End - Call Searchable Dropdown List
+
+       // Call new entry modal form
+        $('#btn-new-entry-modal').click(function () {
+
+            // Show loading spinner view
+            $("#my-modal-lg-form-container").html('<span class="fa fa-refresh fa-animate-spin"></span>&nbsp;Loading...');
+
+            // Get new entry form partial view
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.Action("NewAccountPartial"))",
+                success: function (data) {
+                    $("#my-modal-lg-form-container").html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $("#my-modal-lg-form-container").html('<p class="text-danger"><span class="fa fa-exclamation-triangle"></span>&nbsp;Failed to load data.</p>');
+                }
+            });
+
+            // Show the modal view
+            $('#my-modal-lg').modal('show');
+        });
+        //End - Call new entry modal form
+
+        //Call update entry modal form
+        function callUpdateEntryModal(itemId) {
+
+            // Show loading spinner view
+            $("#my-modal-lg-form-container").html('<span class="fa fa-refresh fa-animate-spin"></span>&nbsp;Loading...');
+
+            // Get update entry form partial view
+            $.ajax({
+                cache: false,
+                type: "GET",
+                data: { id: itemId },
+                url: "@(Url.Action("UpdateAccountPartial"))",
+                success: function (data) {
+                    $("#my-modal-lg-form-container").html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $("#my-modal-lg-form-container").html('<p class="text-danger"><span class="fa fa-exclamation-triangle"></span>&nbsp;Failed to load data.</p>');
+                }
+            });
+
+            // Show the modal view
+            $('#my-modal-lg').modal('show');
+        }
+        //End - Call update entry modal form
+
+        //Call reset password modal form
+        function callResetPasswordModal(itemId, userName) {
+
+            // Show loading spinner view
+            $("#my-modal-form-container").html('<span class="fa fa-refresh fa-animate-spin"></span>&nbsp;Loading...');
+
+            // Get reset password form partial view
+            $.ajax({
+                cache: false,
+                type: "GET",
+                data: { id: itemId, username: userName },
+                url: "@(Url.Action("ResetPasswordPartial"))",
+                success: function (data) {
+                    $("#my-modal-form-container").html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $("#my-modal-form-container").html('<p class="text-danger"><span class="fa fa-exclamation-triangle"></span>&nbsp;Failed to load data.</p>');
+                }
+            });
+
+            // Show the modal view
+            $('#myModal').modal('show');
+        }
+        //End - Call reset password modal form
+
+        //Reload datatable
+        $("#btn-datatable-reload").on('click', function () {
+
+            // Clear the control panel
+            $('#table-control-panel').html('');
+
+            // Show loading spinner view
+            $("#list-view-partial-container").html('<span class="fa fa-refresh fa-animate-spin"></span>&nbsp;Loading...');
+
+            // Reload the datatable
+            loadData();
+        })
+        //End - Reload datatable
+
+        // Load datatable
+        function loadData() {
+            //Loading the partial view data on XHR
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.Action("ViewAccountPartial"))",
+                success: function (data) {
+                    $("#list-view-partial-container").html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $("#list-view-partial-container").html('<p class="text-danger"><span class="fa fa-exclamation-triangle"></span>&nbsp;Failed to load data.</p>');
+                }
+            });
+        }
+        //End - Load datatable
+
+        loadData();
+
+    </script>
+
+}

@@ -11,5 +11,30 @@
         </ul>
     </div>
 
+    <div class="menu_section">
+        <h3>System Administration</h3>
+        <ul class="nav side-menu">   
+            <li>
+                <a><i class="fa fa-gear"></i> Account Administration <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li>
+                        <a href="@Url.Action("Index", "Manage")"> Accounts </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("ViewRoles", "Manage")"> Roles </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-gear"></i> System Events <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li>
+                        <a href="@Url.Action("ViewEvents", "Manage")"> Events </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
 </div>

@@ -1,0 +1,95 @@
+﻿
+@model List<app.Infra.Models.Manage.UserViewModel>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="dataTable_wrapper">
+            <table class="table table-striped table-bordered table-hover" id="dataTable">
+                <thead>
+                    <tr>
+                        <th class="col-lg-2"> Username </th>
+                        <th> Fullname </th>
+                        <th class="col-lg-2"> System Role </th>
+                        <th class="col-lg-1"> Status </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        var row = Model[i];
+                        <tr class="@(i % 2 != 0 ? "odd" : "even")">
+                            <td>
+                                @Html.HiddenFor(o => row.Id)
+                                @Html.HiddenFor(o => row.Username)
+                                @row.Username
+                            </td>
+                            <td>@row.FirstName @row.MiddleName @row.LastName</td>
+                            <td>@row.RoleName</td>
+                            <td>
+                                @if (row.IsActive)
+                                {
+                                    <h5 class="status-label"> <span class="label label-pill label-success">Active</span></h5>
+                                }
+                                else
+                                {
+                                    <h5 class="status-label"><span class="label label-pill label-default">Inactive</span></h5>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        // Datatable initialization
+        var table = $('#dataTable').DataTable({
+
+            buttons: ['copy', 'excel']
+        });
+
+        // Datatable buttons setup
+        table
+            .buttons()
+            .container()
+            .appendTo('#table-control-panel');
+
+        // Click event on table row
+        $('#dataTable tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+
+        // Update button
+        $('#btn-update-entry-modal').click(function () {
+            var id = $("#dataTable tr.selected #row_Id").val();
+
+            if (id !== undefined) {
+                callUpdateEntryModal(id);
+            }
+        });
+
+        // Password reset button
+        $('#btn-reset-pass-modal').click(function () {
+            var id = $("#dataTable tr.selected #row_Id").val();
+            var uname = $("#dataTable tr.selected #row_Username").val();
+
+            if (id !== undefined) {
+                callResetPasswordModal(id, uname);
+            }
+        });
+
+    });
+
+</script>
