@@ -13,14 +13,10 @@ namespace app.Web.Controllers
     [AllowAnonymous]
     public class AccountController : BaseController
     {
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
         }
 
@@ -43,7 +39,6 @@ namespace app.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginInputViewModel model, string button)
         {
-
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberLogin, lockoutOnFailure: true);
@@ -101,8 +96,5 @@ namespace app.Web.Controllers
             vm.RememberLogin = model.RememberLogin;
             return vm;
         }
-
-
-
     }
 }

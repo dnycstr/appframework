@@ -1,5 +1,7 @@
 using app.Data.Contexts;
 using app.Data.Entities.AspNet;
+using app.Service.Services;
+using app.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +33,8 @@ namespace app.Web
             services.AddIdentity<ApplicationUser, IdentityRole>()
               .AddEntityFrameworkStores<ApplicationDbContext>()
               .AddDefaultTokenProviders();
+
+            services.AddScoped<IContactService, ContactService>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

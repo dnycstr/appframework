@@ -15,17 +15,10 @@ namespace app.Data.Entities
 
         [StringLength(250)]
         public string Middlename { get; set; }
-
-        [Required]
+        
         [StringLength(250)]
         public string Lastname { get; set; }
-
-        public bool IsEmployee { get; set; }
-
-        public bool IsClient { get; set; }
-
-        public bool IsSupplier { get; set; }
-
+        
         public int? OrganizationId { get; set; }
 
         [ForeignKey("OrganizationId")]

@@ -13,25 +13,15 @@ using System.Threading.Tasks;
 
 namespace app.Web.Controllers
 {   
+    [Authorize]
     [Route("manage")]
     public class ManageController : BaseController
-    {
-        
+    {        
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private IServiceResult ServiceResultModel { get; set; }
-        private ApplicationDbContext _context { get; set; }
-        public ManageController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            RoleManager<IdentityRole> roleManager,
-            ApplicationDbContext context)
+        public ManageController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
-            _roleManager = roleManager;
-            _context = context;
         }
 
 

@@ -20,5 +20,9 @@ namespace app.Data.Contexts
             base.OnModelCreating(modelBuilder);
         }                   
                 
+        public DbSet<Contact> Contacts { get; set; }
+
+        public DbSet<Organization> Organizations { get; set; }
+
     }
 }

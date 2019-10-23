@@ -16,16 +16,7 @@ namespace app.Data.Entities
 
         [StringLength(500)]
         public string Description { get; set; }
-
-        public bool IsClient { get; set; }
-
-        public bool IsSupplier { get; set; }
-
-        // Transaction
-
-      
-
-
+                     
         // Contact
 
         [StringLength(100)]

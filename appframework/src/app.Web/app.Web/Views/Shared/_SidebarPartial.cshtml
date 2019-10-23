@@ -10,10 +10,23 @@
             </li>
         </ul>
     </div>
+    <div class="menu_section">
+        <h3>Partners</h3>
+        <ul class="nav side-menu">
+            <li>
+                <a><i class="fa fa-gear"></i> Contacts <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li>
+                        <a href="@Url.Action("ViewContacts", "Contact")"> Contacts </a>
+                    </li>
+                </ul>
+            </li>
 
+        </ul>
+    </div>
     <div class="menu_section">
         <h3>System Administration</h3>
-        <ul class="nav side-menu">   
+        <ul class="nav side-menu">
             <li>
                 <a><i class="fa fa-gear"></i> Account Administration <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
@@ -22,14 +35,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a><i class="fa fa-gear"></i> System Events <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li>
-                        <a href="@Url.Action("ViewEvents", "Manage")"> Events </a>
-                    </li>
-                </ul>
-            </li>
+
         </ul>
     </div>
 
