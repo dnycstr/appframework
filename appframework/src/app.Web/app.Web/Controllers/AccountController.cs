@@ -24,7 +24,7 @@ namespace app.Web.Controllers
         /// Entry point into the login workflow
         /// </summary>
         [HttpGet]
-        public async Task<IActionResult> Login(string returnUrl)
+        public IActionResult Login(string returnUrl)
         {
             // build a model so we know what to show on the login page
             var vm = BuildLoginViewModelAsync(returnUrl);

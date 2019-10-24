@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace app.Data.Migrations
+namespace app.Data.Migrations.Application
 {
-    public partial class AddContactAndOrganizationTable : Migration
+    public partial class ContactAndOrganizationTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

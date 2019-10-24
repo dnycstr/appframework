@@ -6,22 +6,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace app.Service.Services
 {
     public class ContactService : BaseService, IContactService
     {
-        public ContactService(ApplicationDbContext context) : base(context)
+        public ContactService(IApplicationDbContext context) : base(context)
         {
 
         }
 
         #region Contact
 
-        public ServiceResult AddNewContactEntity(Contact entity)
+        public async Task<ServiceResult<int>> AddNewContactEntityAsync(Contact entity)
         {
             if (entity == null)
-                return Result(false, "Entry is invalid.");
+                return Result(0, false, "Entry is invalid.");
 
             try
             {
@@ -29,7 +30,7 @@ namespace app.Service.Services
                     Context.Contacts.FirstOrDefault(o => !o.IsDeleted && o.Firstname == entity.Firstname && o.Lastname == entity.Lastname);
 
                 if (contactEntity != null)
-                    return Result(false, "Entry already exists.");
+                    return Result(0, false, "Entry already exists.");
 
                 contactEntity = new Contact
                 {
@@ -44,17 +45,17 @@ namespace app.Service.Services
                     MobileNumber = entity.MobileNumber,
                 };
                 Context.Contacts.Add(contactEntity);
-                Context.SaveChanges();
+                await Context.SaveChangesAsync();
 
-                return Result(true);
+                return Result(contactEntity.Id, true);
             }
             catch (Exception e)
             {
-                return Result(false, e.Message);
+                return Result(0, false, e.Message);
             }
         }
 
-        public ServiceResult UpdateContactEntity(Contact entity)
+        public async Task<ServiceResult> UpdateContactEntityAsync(Contact entity)
         {
             if (entity == null)
                 return Result(false, "Entry is invalid.");
@@ -83,7 +84,7 @@ namespace app.Service.Services
                 contactEntity.TelephoneNumber = entity.TelephoneNumber;
                 contactEntity.MobileNumber = entity.MobileNumber;
 
-                Context.SaveChanges();
+               await Context.SaveChangesAsync();
 
                 return Result(true);
             }
@@ -93,7 +94,7 @@ namespace app.Service.Services
             }
         }
 
-        public ServiceResult DeleteContactEntity(int contactId)
+        public async Task<ServiceResult> DeleteContactEntityAsync(int contactId)
         {
             if (contactId == 0)
                 return Result(false, "Entry is invalid.");
@@ -109,7 +110,7 @@ namespace app.Service.Services
                 // If everything is fine, update the entry
                 contactEntity.IsDeleted = true;
 
-                Context.SaveChanges();
+                await Context.SaveChangesAsync();
 
                 return Result(true);
             }

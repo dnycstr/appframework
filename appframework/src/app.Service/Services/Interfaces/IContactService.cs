@@ -3,21 +3,20 @@ using app.Service.Services.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace app.Service.Services.Interfaces
 {
     public interface IContactService
     {
-        public ServiceResult AddNewContactEntity(Contact entity);
+        public Task<ServiceResult<int>> AddNewContactEntityAsync(Contact entity);
 
-        public ServiceResult UpdateContactEntity(Contact entity);
+        public Task<ServiceResult> UpdateContactEntityAsync(Contact entity);
 
-        public ServiceResult DeleteContactEntity(int id);
+        public Task<ServiceResult> DeleteContactEntityAsync(int id);
 
         public ServiceResult<List<Contact>> GetAllContacts();
 
         public ServiceResult<Contact> GetContact(int id);
-
-
     }
 }

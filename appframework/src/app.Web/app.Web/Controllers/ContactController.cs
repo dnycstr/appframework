@@ -24,13 +24,13 @@ namespace app.Web.Controllers
         #region Contacts - View List
 
         [HttpGet, Route("view-contacts")]
-        public ActionResult ViewContacts()
+        public IActionResult ViewContacts()
         {
             return View();
         }
 
         [HttpGet, Route("view-contact-partial")]
-        public ActionResult ViewContactPartial()
+        public IActionResult ViewContactPartial()
         {
             if (!Request.IsAjaxRequest())
             {
@@ -49,7 +49,7 @@ namespace app.Web.Controllers
 
         //Ajax - New Entry Form
         [HttpGet, Route("new-contact-partial")]
-        public ActionResult NewContactPartial()
+        public IActionResult NewContactPartial()
         {
             if (!Request.IsAjaxRequest())
             {
@@ -61,7 +61,7 @@ namespace app.Web.Controllers
         }
 
         [HttpPost, Route("new-contact-partial")]
-        public ActionResult NewContactPartial(ContactNewViewModel model)
+        public async Task<IActionResult> NewContactPartial(ContactNewViewModel model)
         {
             if (!Request.IsAjaxRequest())
             {
@@ -76,7 +76,7 @@ namespace app.Web.Controllers
             {
                 var entity = model.GetBase();
 
-                ServiceResultModel = _contactService.AddNewContactEntity(entity);
+                ServiceResultModel = await _contactService.AddNewContactEntityAsync(entity);
 
                 if (ServiceResultModel.IsSuccess)
                 {
@@ -101,7 +101,7 @@ namespace app.Web.Controllers
 
         //Ajax - Update Entry Form
         [HttpGet, Route("update-contact-partial")]
-        public ActionResult UpdateContactPartial(int id)
+        public IActionResult UpdateContactPartial(int id)
         {
             if (!Request.IsAjaxRequest())
             {
@@ -121,7 +121,7 @@ namespace app.Web.Controllers
         }
 
         [HttpPost, Route("update-contact-partial")]
-        public ActionResult UpdateContactPartial(ContactUpdateViewModel model, string command)
+        public async Task<IActionResult> UpdateContactPartial(ContactUpdateViewModel model, string command)
         {
             if (!Request.IsAjaxRequest())
             {
@@ -143,7 +143,7 @@ namespace app.Web.Controllers
                    
             if (command == "Delete")
             {
-                ServiceResultModel = _contactService.DeleteContactEntity(model.Id);
+                ServiceResultModel = await _contactService.DeleteContactEntityAsync(model.Id);
 
                 if (ServiceResultModel.IsSuccess)
                 {
@@ -159,7 +159,7 @@ namespace app.Web.Controllers
             {
                 contactEntity = model.UpdateBase(contactEntity);
 
-                ServiceResultModel = _contactService.UpdateContactEntity(contactEntity);
+                ServiceResultModel = await _contactService.UpdateContactEntityAsync(contactEntity);
 
                 if (ServiceResultModel.IsSuccess)
                 {

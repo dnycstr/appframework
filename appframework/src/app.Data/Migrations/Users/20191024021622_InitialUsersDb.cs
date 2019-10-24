@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace app.Data.Migrations
+namespace app.Data.Migrations.Users
 {
-    public partial class IntialDb : Migration
+    public partial class InitialUsersDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

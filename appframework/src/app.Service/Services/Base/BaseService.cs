@@ -8,7 +8,7 @@ namespace app.Service.Services.Base
     /// <summary>
     /// 
     /// </summary>
-    public abstract class BaseService : IDisposable
+    public abstract class BaseService 
     {
         /// <summary>
         /// Gets or sets the DbContext. This will serve as you main database connection for this service.
@@ -16,12 +16,12 @@ namespace app.Service.Services.Base
         /// <value>
         /// The context.
         /// </value>
-        public ApplicationDbContext Context { get; set; }
+        public IApplicationDbContext Context { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseService"/> class.
         /// </summary>
-        protected BaseService(ApplicationDbContext context)
+        protected BaseService(IApplicationDbContext context)
         {
             Context = context;
         }
@@ -52,10 +52,6 @@ namespace app.Service.Services.Base
 
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            Context.Dispose();
-        }
+        /// </summary>    
     }
 }
