@@ -37,6 +37,7 @@ namespace app.Web
               .AddDefaultTokenProviders();
                         
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IOrganizationService, OrganizationService>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
