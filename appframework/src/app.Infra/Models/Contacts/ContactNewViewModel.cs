@@ -10,11 +10,11 @@ namespace app.Infra.Models.Contacts
     {
         public ContactNewViewModel()
         {
-            OrganizationSelectListItems = new List<SelectListItem>();
+
         }
 
-        public List<SelectListItem> OrganizationSelectListItems { get; set; }
-
+        public string OrganizationText { get; set; }
+        
         public bool IsSuccess { get; set; }
 
         public string ErrorMessage { get; set; }

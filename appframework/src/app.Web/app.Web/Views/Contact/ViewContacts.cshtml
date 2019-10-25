@@ -60,6 +60,38 @@
 @section scripts
 {
 
+    <script>
+               
+          $('body')
+            .on('click',
+                ".modal-selector",
+                function() {
+
+                    var selectorTitle = $(this).data("selector-title");
+                    var selectorUrl = $(this).data("selector-url");
+                    
+                    $('#my-modal-selector-title').html(selectorTitle);
+                    
+                    //Loading the partial view data on XHR
+                    $.ajax({
+                        cache: false,
+                        type: "GET",
+                        url: selectorUrl,
+                        success: function(data) {
+                            $("#my-modal-selector-form-container").html(data);
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            $("#my-modal-selector-form-container")
+                                .html('<p class="text-danger"><span class="fa fa-exclamation-triangle"></span>&nbsp;Failed to load data.</p>');
+                        }
+                    });
+
+                    $('#my-modal-selector').draggable({handle: ".modal-header"});
+                    $('#my-modal-selector').modal('show');
+
+                });
+
+    </script>
 
     <script type="text/javascript">
 

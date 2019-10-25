@@ -6,11 +6,14 @@ using app.Core.Extensions;
 using app.Infra.Models.Contacts;
 using app.Service.Services.Base;
 using app.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace app.Web.Controllers
 {
+    [Authorize]
+    [Route("contact")]
     public class ContactController : Controller
     {
         private IContactService _contactService;
@@ -61,7 +64,6 @@ namespace app.Web.Controllers
             }
 
             var model = new ContactNewViewModel();
-            GetDefaultContactNewViewModel(model);
             return PartialView("_NewContactPartial", model);
         }
 
@@ -76,7 +78,6 @@ namespace app.Web.Controllers
             if (model == null) return PartialView("_FailureToLoadDataPartial");
 
             ViewBag.HttpMethod = Request.Method;
-            GetDefaultContactNewViewModel(model);
 
             if (ModelState.IsValid)
             {
@@ -95,16 +96,7 @@ namespace app.Web.Controllers
             }
             
             return PartialView("_NewContactPartial", model);
-        }
-
-        public void GetDefaultContactNewViewModel(ContactNewViewModel model)
-        {
-            var orglist = _organizationService.GetAllOrganizations().Data
-            .Select(o => new { Value = o.Id, Text = o.Name }).ToList();
-
-            model.OrganizationSelectListItems = new SelectList(orglist, "Value", "Text").ToList();
-        }
-
+        }        
         //End - Ajax - New Entry Form
         
         #endregion
@@ -129,7 +121,6 @@ namespace app.Web.Controllers
                 return PartialView("_FailureToLoadDataPartial");
 
             var model = new ContactUpdateViewModel(contactEntity);
-            GetDefaultContactUpdateViewModel(model);
             return PartialView("_UpdateContactPartial", model);
         }
 
@@ -144,7 +135,6 @@ namespace app.Web.Controllers
             if (model == null) return PartialView("_FailureToLoadDataPartial");
 
             ViewBag.HttpMethod = Request.Method;
-            GetDefaultContactUpdateViewModel(model);
 
             var contactEntity = _contactService.GetContact(model.Id).Data;
 
@@ -186,14 +176,6 @@ namespace app.Web.Controllers
             }
             
             return PartialView("_UpdateContactPartial", model);
-        }
-
-        public void GetDefaultContactUpdateViewModel(ContactUpdateViewModel model)
-        {
-            var orglist = _organizationService.GetAllOrganizations().Data
-            .Select(o => new { Value = o.Id, Text = o.Name }).ToList();
-
-            model.OrganizationSelectListItems = new SelectList(orglist, "Value", "Text").ToList();
         }
 
         //End - Ajax - Update Entry Form

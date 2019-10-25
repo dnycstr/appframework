@@ -6,10 +6,13 @@ using app.Core.Extensions;
 using app.Infra.Models.Organizations;
 using app.Service.Services.Base;
 using app.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace app.Web.Controllers
 {
+    [Authorize]
+    [Route("organization")]
     public class OrganizationController : Controller
     {
         private IOrganizationService _organizationService;
@@ -41,6 +44,24 @@ namespace app.Web.Controllers
             model.AddRange(_organizationService.GetAllOrganizations().Data
                 .Select(o => new OrganizationDetailsViewModel(o)));
             return PartialView("_ViewOrganizationPartial", model);
+        }
+
+        #endregion
+
+        #region Organizations - Modal Selector Table
+
+        [HttpGet, Route("view-organization-selector-partial")]
+        public IActionResult ViewOrganizationSelectorPartial()
+        {
+            if (!Request.IsAjaxRequest())
+            {
+                return RedirectToAction("BadRequest", "Home");
+            }
+
+            var model = new List<OrganizationDetailsViewModel>();
+            model.AddRange(_organizationService.GetAllOrganizations().Data
+                .Select(o => new OrganizationDetailsViewModel(o)));
+            return PartialView("_ViewOrganizationSelectorPartial", model);
         }
 
         #endregion

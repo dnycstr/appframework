@@ -11,23 +11,24 @@
     <title>@ViewBag.Title | DSC App</title>
 
     @*<environment include="Development">*@
-        <!-- Bootstrap -->
-        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <!-- Font Awesome -->
-        <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-        <!-- NProgress -->
-        <link href="~/lib/nprogress/nprogress.css" rel="stylesheet">
-        <!-- Datatables -->
-        <link href="~/lib/datatables/datatables.css" rel="stylesheet" />
-        <link href="~/lib/choosen/chosen.css" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/lib/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="~/lib/datatables/datatables.css" rel="stylesheet" />
+    <link href="~/lib/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/lib/choosen/chosen.css" rel="stylesheet" />
     @*</environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
-    </environment>*@
+        <environment exclude="Development">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+                  crossorigin="anonymous"
+                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        </environment>*@
 
     <!-- Custom Theme Style -->
     <link href="~/css/custom.css" rel="stylesheet" />
@@ -142,6 +143,26 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+
+
+    <div class="modal fade" id="my-modal-selector" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="my-modal-label">
+                        <span id="my-modal-selector-title"></span>
+                    </h4>
+                </div>
+                <div class="modal-body" id="my-modal-selector-form-container">
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
     <!-- /.modal -->
     @*<environment include="Development">*@
     <!-- jQuery -->
@@ -156,6 +177,7 @@
     <!-- Datatables -->
     <script src="~/lib/datatables/datatables.js"></script>
 
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
     <script src="~/lib/choosen/chosen.jquery.js"></script>
     <script src="~/lib/blockUI/jquery.blockUI.js"></script>
     @*</environment>
@@ -192,7 +214,7 @@
 
             $('div.main_container').unblock();
         }
-        // End - On Form Submit End
+            // End - On Form Submit End
     </script>
 
 

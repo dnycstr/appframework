@@ -10,7 +10,7 @@ namespace app.Infra.Models.Contacts
     {
         public ContactUpdateViewModel()
         {
-            OrganizationSelectListItems = new List<SelectListItem>();
+           
         }
 
         public ContactUpdateViewModel(Contact entity)
@@ -29,10 +29,12 @@ namespace app.Infra.Models.Contacts
             this.TelephoneNumber = entity.TelephoneNumber;
             this.MobileNumber = entity.MobileNumber;
 
-            this.OrganizationSelectListItems = new List<SelectListItem>();
+            if (entity.Organization != null)
+                this.OrganizationText = entity.Organization.Name;
+           
         }
 
-        public List<SelectListItem> OrganizationSelectListItems { get; set; }
+        public string OrganizationText { get; set; }
 
         public bool IsSuccess { get; set; }
 
