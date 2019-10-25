@@ -1,4 +1,5 @@
 ﻿using app.Data.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,8 +10,10 @@ namespace app.Infra.Models.Contacts
     {
         public ContactNewViewModel()
         {
- 
+            OrganizationSelectListItems = new List<SelectListItem>();
         }
+
+        public List<SelectListItem> OrganizationSelectListItems { get; set; }
 
         public bool IsSuccess { get; set; }
 
