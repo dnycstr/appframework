@@ -5,6 +5,7 @@ using System.Text;
 
 namespace app.Infra.Models.Manage
 {
+    ///View model for displaying user details
     public class UserViewModel : ServiceResult
     {
 
