@@ -10,7 +10,7 @@ namespace app.Infra.Models.Manage
     {
 
         public string Id { get; set; }
-
+        [StringLength(200)]
         public string FirstName { get; set; }
 
         public string MiddleName { get; set; }
